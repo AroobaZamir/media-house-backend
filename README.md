@@ -1,61 +1,77 @@
-# 🚀 Getting started with Strapi
+# MediaHouse Backend
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+This repository contains the Strapi backend for the MediaHouse application. It provides content management for articles, authors, categories, tags, and newsletter subscribers.
 
-### `develop`
+## Project Overview
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+The backend manages:
 
+- Article content and publishing workflow
+- Author profiles and associated metadata
+- Category management for article grouping
+- Newsletter subscriber collection storage
+- Strapi admin user interface for editorial control
+
+## Tech Stack
+
+- Strapi CMS
+- SQLite database for local development
+- Node.js
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+cd mediahouse-backend
+npm install
 ```
+
+2. Create or update the backend environment file:
+
+```bash
+cp .env.example .env
+```
+
+3. Start the Strapi server:
+
+```bash
 npm run develop
-# or
-yarn develop
 ```
 
-### `start`
+4. Open the Strapi admin panel:
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
-yarn start
+```text
+http://localhost:1337/admin
 ```
 
-### `build`
+## Available Scripts
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+- `npm run develop` - Run Strapi in development mode with live reload
+- `npm run start` - Start Strapi without the development watch mode
+- `npm run build` - Build the Strapi admin panel for production
 
-```
-npm run build
-# or
-yarn build
-```
+## Directory Structure
 
-## ⚙️ Deployment
+- `src/api/` - Strapi content types, controllers, services, and routes
+- `config/` - Strapi configuration files
+- `public/` - Static files served by Strapi
+- `.tmp/` - Strapi temporary runtime files (ignored from source control)
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+## Environment Configuration
 
-```
-yarn strapi deploy
-```
+- `DATABASE_CLIENT=sqlite`
+- `DATABASE_FILENAME=.tmp/data.db`
 
-## 📚 Learn more
+Use `mediahouse-backend/.env` to store local configuration and secret values. Do not commit `.env` to version control.
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+## Notes for Review
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+- This repository is intended to operate as an independent backend service.
+- The frontend should connect to this backend via `http://localhost:1337`.
+- The subscriber collection type is stored in `src/api/subscriber/content-types/subscriber/schema.json`.
 
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+- [ ] Backend starts successfully
+- [ ] Strapi admin interface is accessible
+- [ ] Content types load in the admin panel
+- [ ] Subscriber data can be created via frontend or Strapi API
