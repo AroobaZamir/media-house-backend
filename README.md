@@ -112,26 +112,36 @@ Use `mediahouse-backend/.env` to store local configuration and secret values. Do
    - **Name**: `mediahouse-db`
    - **Database**: `strapi`
    - **User**: `strapi`
-3. Copy the `Internal Database URL` after creation
+3. After creation, Render will show a **connection string** that looks like:
+   ```
+   postgresql://strapi:YOUR_PASSWORD@dpg-xxxxx.oregon-postgres.render.com:5432/strapi
+   ```
+4. **Copy this entire connection string** — this is your `DATABASE_URL`
 
 ### Step 4: Connect Database to Web Service
 
-1. Go back to your web service
-2. Click "Environment"
-3. Add environment variables:
+1. Go back to your web service in Render
+2. Click "Environment" in the left menu
+3. Add these environment variables:
 
    - `DATABASE_CLIENT=postgres`
-   - `DATABASE_URL=<paste the database URL from step 3>`
+   - `DATABASE_URL=postgresql://strapi:YOUR_PASSWORD@dpg-xxxxx.oregon-postgres.render.com:5432/strapi` (paste your URL from Step 3)
    - `DATABASE_SSL=true`
    - `DATABASE_SSL_REJECT_UNAUTHORIZED=false`
 
-4. For security, also add:
-   - `APP_KEYS` (generate a secure value or copy from local `.env`)
-   - `API_TOKEN_SALT` (generate a secure value)
-   - `ADMIN_JWT_SECRET` (generate a secure value)
-   - `TRANSFER_TOKEN_SALT` (generate a secure value)
-   - `JWT_SECRET` (generate a secure value)
-   - `ENCRYPTION_KEY` (generate a secure value)
+4. For security, also add these secret keys (copy from your local `.env` or generate new ones):
+   - `APP_KEYS`
+   - `API_TOKEN_SALT`
+   - `ADMIN_JWT_SECRET`
+   - `TRANSFER_TOKEN_SALT`
+   - `JWT_SECRET`
+   - `ENCRYPTION_KEY`
+
+**To find your DATABASE_URL after creating PostgreSQL:**
+
+- Go to **Render Dashboard** → **Databases** → Click your `mediahouse-db` instance
+- Under **Connection** section, you'll see the **Internal URL** (use this for the web service)
+- Copy the full URL and paste it as `DATABASE_URL` in Step 4
 
 ### Step 5: Deploy
 
